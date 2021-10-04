@@ -1,14 +1,14 @@
 #include "mbed.h"
 
-// Hardware Definitions
+// Hardware Definitions (THESE ARE ALLOWED FOR PUSH_PULL OPERATION)
 #define TRAF_GRN1_PIN PC_6
 #define TRAF_YEL1_PIN PC_3
 #define TRAF_RED1_PIN PC_2
 
-// Objects
-DigitalOut grn(TRAF_GRN1_PIN);
-DigitalOut yel(TRAF_YEL1_PIN);
-DigitalOut red(TRAF_RED1_PIN,1);
+// Objects All LED's are now on (301 - 4) 
+DigitalOut grn(TRAF_GRN1_PIN,1);
+DigitalOut yel(TRAF_YEL1_PIN,1);
+DigitalOut red(TRAF_RED1_PIN,1); // RED is on (301 - 3)
 
 int main()
 {
