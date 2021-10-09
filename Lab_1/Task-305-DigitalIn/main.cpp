@@ -18,6 +18,7 @@
 // Inputs
 DigitalIn SW2(BTN1_PIN);
 DigitalIn SW3(BTN2_PIN);
+// Understanding of the pull down resistor: https://circuitdigest.com/tutorial/pull-up-and-pull-down-resistor
 DigitalInOut SW4(BTN3_PIN,PIN_INPUT,PullDown,0);
 DigitalInOut SW5(BTN4_PIN,PIN_INPUT,PullDown,0);
 
@@ -39,6 +40,12 @@ int main()
             ledYel = 1;
         } else {
             ledYel = 0;
+        }
+
+        if ((SW4 == 1) && (SW5 == 1)) {
+            ledGrn = 1;
+        } else {
+            ledGrn = 0;
         }
     }
 }
