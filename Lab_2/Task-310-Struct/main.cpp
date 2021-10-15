@@ -21,7 +21,7 @@ int main() {
     // Creating instance of complex number and Initialise
     ComplexNumber_C y = {p.real + q.real, p.imag + q.imag};
 
-    printf("%f %fi", y.real, y.imag);
+    printf("\n\n%f %fi\n", y.real, y.imag);
     
     while (true) {
     }
