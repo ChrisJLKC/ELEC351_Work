@@ -1,22 +1,5 @@
 #include "mbed.h"
-
-typedef struct {
-  double real;
-  double imag;
-} ComplexNumber_C;
-
-ComplexNumber_C complexAdd(const ComplexNumber_C a, const ComplexNumber_C b) {
-    ComplexNumber_C y = a;
-    y.real += b.real;
-    y.imag += b.imag;
-    return y;
-}
-
-void complexDisplay(const char *strName, const ComplexNumber_C u) {
-    printf("%s = %f + j%f\n", strName, u.real, u.imag);
-}
-
-// TASK - write and test complexConjugate, complexNegate, complexSubtract, complexMagnitude, complexMultiply and complexDivide
+#include "Complex.h"
 
 int main() {
     printf("\n\nTASK312\n");
@@ -29,6 +12,33 @@ int main() {
  
     ComplexNumber_C sum = complexAdd(p, q);
     complexDisplay("p+q", sum);
+
+    ComplexNumber_C Con_p = complexConjugate(p);
+    complexDisplay("p_Con", Con_p);
+
+    ComplexNumber_C Con_q = complexConjugate(q);
+    complexDisplay("q_Con", Con_q);
+
+    ComplexNumber_C Neg_p = complexNegate(p);
+    complexDisplay("p_Neg", Neg_p);
+
+    ComplexNumber_C Neg_q = complexNegate(q);
+    complexDisplay("q_Neg", Neg_q);
+
+    ComplexNumber_C Sub_p_q = complexSubract(p, q);
+    complexDisplay("Sub_p_q", Sub_p_q);
+
+    ComplexNumber_C Mag_p = complexMagnitude(p);
+    complexDisplay("Mag_p", Mag_p);
+
+    ComplexNumber_C Mag_q = complexMagnitude(q);
+    complexDisplay("Mag_q", Mag_q);
+
+    ComplexNumber_C Multi_p_q = complexMultiply(p, q);
+    complexDisplay("Multi_p_q", Multi_p_q);
+
+    ComplexNumber_C Divide_p_q = complexDivide(p, q);
+    complexDisplay("Divide_p_q", Divide_p_q);
 
     
     while (true) {
