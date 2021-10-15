@@ -40,6 +40,21 @@ int main() {
     ComplexNumber_C Divide_p_q = complexDivide(p, q);
     complexDisplay("Divide_p_q", Divide_p_q);
 
+    complexNegateInplace(&p);
+    complexNegateInplace(&q);
+
+    complexDisplay("ComplexNegate_p", p);
+    complexDisplay("ComplexNegate_q", q);
+
+    p = {2.0, 3.0};
+    q = {1.0, 1.0};
+
+    complexConjugateInplace(&p);
+    complexConjugateInplace(&q);
+
+    complexDisplay("ComplexConjugate_p", p);
+    complexDisplay("ComplexConjugate_q", q);
+
     
     while (true) {
     }

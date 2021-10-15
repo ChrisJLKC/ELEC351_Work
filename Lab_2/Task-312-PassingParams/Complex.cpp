@@ -62,6 +62,17 @@ ComplexNumber_C complexDivide(const ComplexNumber_C a, const ComplexNumber_C b) 
     return y;
 }
 
+// Accessing Memory Locations and changing the values, reducing a step
+void complexNegateInplace(ComplexNumber_C* u) {
+    u->imag = -u->imag;
+    u->real = -u->real;
+}
+
+void complexConjugateInplace(ComplexNumber_C* u) {
+    u->real = (u->real + u->imag) * (u->real - u->imag);
+    u->imag = 0;
+}
+
 void complexDisplay(const char *strName, const ComplexNumber_C u) {
     printf("%s = %f + j%f\n", strName, u.real, u.imag);
 }

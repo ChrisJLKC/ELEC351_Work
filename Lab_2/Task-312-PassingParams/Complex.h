@@ -14,6 +14,7 @@ ComplexNumber_C complexMagnitude(ComplexNumber_C a);
 ComplexNumber_C complexMultiply(const ComplexNumber_C a, const ComplexNumber_C b);
 ComplexNumber_C complexDivide(const ComplexNumber_C a, const ComplexNumber_C b);
 void complexDisplay(const char *strName, const ComplexNumber_C u); 
-
+void complexNegateInplace(ComplexNumber_C* u);
+void complexConjugateInplace(ComplexNumber_C* u);
 
 #endif
