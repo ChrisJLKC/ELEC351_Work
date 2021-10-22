@@ -56,7 +56,7 @@ int main()
     DoubleNumber n1;
     DoubleNumber n2;
 
-    //setValue function overloading  
+    //setValue function overloading 
     n1.setValue(10);
     n2.setValue("-3.0");
 
