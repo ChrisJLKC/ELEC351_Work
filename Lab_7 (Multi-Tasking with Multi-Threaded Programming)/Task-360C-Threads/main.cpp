@@ -15,8 +15,10 @@ int main() {
     FlashingLED yellow(TRAF_YEL1_PIN);
     t1.start(task1);
     t2.start(task2);
-    
-    //t1.set_priority(osPriorityRealtime);  //Try this
+
+
+    // flashing yellow stops and gets blocked, as we are using spinning behaviour
+    // t1.set_priority(osPriorityRealtime);  //Try this
 
     //Wait for t1 and t2 to end (which they never do)
     t1.join();
