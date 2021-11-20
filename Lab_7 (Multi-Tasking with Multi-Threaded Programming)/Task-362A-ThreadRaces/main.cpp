@@ -90,7 +90,7 @@ int main() {
         t1.start(countUp);
         wait_us(skew);
         t2.start(countDown);
-        // Adding lock to make the threads wait for each other
+        // Adding lock to make the threads wait for each other instead of racing each other
         MutexKeyLock.lock();
         t1.join();  //Wait for t1 to complete
         t2.join();  //Wait for t2 to complete
