@@ -22,20 +22,19 @@ LCD_16X2_DISPLAY disp;
 Thread t1;
 Thread t2;
 
-// Mutex Keylock for removing race conditions
-Mutex MutexKeyLock;
-
 //Shared mutable state
 volatile long long counter = 0; //Volatile means it must be stored in memory
+//Associated MUTEX
+Mutex counterLock;
 
-// Critical Sections will be interrupted by each thread, which will give us wrong answers!
+
 //Increment the shared variable 
 void countUp()
 {
     //RED MEANS THE COUNT UP FUNCTION IS IN ITS CRITICAL SECTION
     green_led = 1;
     for (unsigned int n=0; n<N; n++) {
-        MutexKeyLock.lock();
+        counterLock.lock();
         counter++; 
         counter++;
         counter++;
@@ -45,8 +44,8 @@ void countUp()
         counter++;
         counter++;
         counter++;
-        counter++;         
-        MutexKeyLock.unlock();
+        counter++; 
+        counterLock.unlock();          
     }  
     green_led = 0; 
     
@@ -58,7 +57,7 @@ void countDown()
     //YELLOW MEANS THE COUNT DOWN FUNCTION IS IN ITS CRITICAL SECTION
     yellow_led = 1;
     for (unsigned int n=0; n<N; n++) {
-        MutexKeyLock.lock();
+        counterLock.lock();
         counter--;
         counter--;
         counter--;
@@ -68,8 +67,8 @@ void countDown()
         counter--;
         counter--;
         counter--;
-        counter--;
-        MutexKeyLock.unlock();         
+        counter--;   
+        counterLock.unlock();        
     }
     yellow_led = 0;
     
@@ -102,14 +101,14 @@ int main() {
     backLight = 1;
     disp.locate(1, 0);
 
-    MutexKeyLock.lock();
+    counterLock.lock(); //Pedantic, but setting an example :)
     disp.printf("Counter=%Ld\n", counter);
 
     if (counter == 0) {
         red_led = 0;   
     }
-    MutexKeyLock.unlock();
-        
+    counterLock.unlock();   
+
     //Now wait forever
     while (true) {
         ThisThread::sleep_for(Kernel::wait_for_u32_forever);
