@@ -12,7 +12,6 @@ void thread1();
 void thread2();
 void switchISR();
 
-
 //Threads
 Thread t1;
 
@@ -86,6 +85,8 @@ void switchISR() {
         mail_box.free(message);
         return;
     }
+
+    while (buttonA == 1);
 }
 
 //Normal priority thread (consumer)
@@ -98,7 +99,7 @@ void thread1()
         payload = mail_box.try_get();
         
         //Also consider this
-        //payload = mail_box.try_get_for(10s);
+        // payload = mail_box.try_get_for(10s);
 
         //Check status
         if (payload) {
@@ -112,10 +113,10 @@ void thread1()
             printf("SW1: %u\t",              msg.sw1State);
             printf("SW2: %u\n\r",            msg.sw2State);
         } else {
-            //ERROR HANDLER TO BE DONE
-            printf("Timeout!");
-        }
-             
+            // Error Handler
+
+
+        }   
     } //end while
 }
 
