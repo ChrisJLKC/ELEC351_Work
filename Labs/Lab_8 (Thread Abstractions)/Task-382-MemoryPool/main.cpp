@@ -66,10 +66,16 @@ void switchISR() {
     //Write to queue
     bool ok = queue.try_put(message);    //Note we are sending the "pointer"
     
+    // Busy waiting on transmitting side to test.
+    while (buttonA == 1) {};
+
     //Check if succesful
     if (!ok) {
         redLED = 1; 
         mpool.free(message);
+        return;
+    } else {
+        redLED = 0;
         return;
     }
 }
@@ -79,6 +85,9 @@ void thread1()
 {      
     while (true) {
         message_t* payload;
+
+        // Busy waiting recieving side to test.
+        while (buttonB == 1) {};
 
         //Block on the queue
         bool ok = queue.try_get_for(10s, &payload);
