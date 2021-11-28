@@ -13,7 +13,7 @@ typedef struct FlashyParam {
     PinMode mode = PullDefault;
     Kernel::Clock::duration_u32 interval = 500ms;
 
-} FlashyParam;
+} FlashyParam; // Added extra FlashyParam so it doesn't bring up a warning 
 
 void FlashLED(PinName* p)
 {
