@@ -36,6 +36,8 @@ void ISR() {
     //Check if successful
     if (!sent) {
         redLED = 1; 
+    } else {
+        redLED = 0;
     }
 }
 
