@@ -4,12 +4,13 @@
  */
 #include "mbed.h"
 #include "EthernetInterface.h"
+#include <string>
 
 // Network interface
 EthernetInterface net;
 char rbuffer[65];
 
-#define IPV4_HOST_ADDRESS "192.168.137.1"
+#define IPV4_HOST_ADDRESS "192.168.1.147"
 #define TCP_SOCKET_PORT 8080
 
 DigitalIn BlueButton(USER_BUTTON);
@@ -21,6 +22,8 @@ int main()
     printf("Ethernet socket example\n");
     net.connect();
     bool keepGoing = true;
+
+    unsigned int counter = 0;
  
     do {
         // Show the network address
@@ -33,8 +36,8 @@ int main()
         socket.open(&net);
 
         //Option 1. Look up IP address of remote machine on the Internet
-        // net.gethostbyname("ifconfig.io", &a);
-        // printf("IP address of site: %s\n", a.get_ip_address() ? a.get_ip_address() : "None");
+        //net.gethostbyname("ifconfig.io", &a);
+        //printf("IP address of site: %s\n", a.get_ip_address() ? a.get_ip_address() : "None");
 
         //Option 2. Manually set the address (In a Windows terminal, type ipconfig /all and look for the IPV4 Address for the network interface you are using)
         a.set_ip_address(IPV4_HOST_ADDRESS);
@@ -46,12 +49,15 @@ int main()
         socket.connect(a);
 
         // Send a simple array of bytes (I've used a string so you can read it)
-        char sbuffer[] = "Hello, this is the MBED Board talking!";
+        char sbuffer[2];
+        sprintf(sbuffer, "%d", counter);
         char qbuffer[] = "END";
 
         int scount;
         if (BlueButton == 0) {
             scount = socket.send(sbuffer, sizeof sbuffer);
+
+            counter++;
         } else {
             printf("Sending END\n");
             scount = socket.send(qbuffer, sizeof qbuffer);
