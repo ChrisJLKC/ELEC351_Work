@@ -33,7 +33,7 @@ volatile int counter = 0;
 // * Note the speed difference for this particular case.
 // *************************************************************
 
-// #define SPIN // As spinlock assembly file has not got a executable, this will not work, meaning we cant see the difference.
+#define SPIN
 
 void inline increment()
 {
