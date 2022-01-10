@@ -6,4 +6,7 @@ libuopmsb
 .DS_Store
 *.zip
 .DS_Store
-Labs/Lab_9 (Network Programming)/Task-392-NTP-Client/ntp-client/
+mbed-client-for-azure
+ntp-client
+drivers/COMPONENT_wifi_ism43362
+mbed-client-for-azure
