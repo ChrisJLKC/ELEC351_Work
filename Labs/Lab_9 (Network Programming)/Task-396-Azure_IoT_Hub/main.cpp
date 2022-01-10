@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020 Arm Limited
  * SPDX-License-Identifier: Apache-2.0
- */
+*/
 
 #include "mbed.h"
 #include "rtos/ThisThread.h"
