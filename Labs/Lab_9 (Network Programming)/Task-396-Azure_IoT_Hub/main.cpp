@@ -82,6 +82,7 @@ static void on_message_sent(IOTHUB_CLIENT_CONFIRMATION_RESULT result, void* user
 // * COMMAND HANDLER (sends a response back to Azure) *
 // ****************************************************
 DigitalOut led1(LED1); 
+AnalogIn ldr(PC_0);
 DigitalIn blueButton(USER_BUTTON);
 static int on_method_callback(const char* method_name, const unsigned char* payload, size_t size, unsigned char** response, size_t* response_size, void* userContextCallback)
 {
@@ -99,10 +100,11 @@ static int on_method_callback(const char* method_name, const unsigned char* payl
         led1 = 0;
     }
 
+    double ldr_read = ldr;
     int status = 200;
     //char RESPONSE_STRING[] = "{ \"Response\": \"This is the response from the device\" }";
     char RESPONSE_STRING[64];
-    sprintf(RESPONSE_STRING, "{ \"Response\" : %d }", blueButton.read());
+    sprintf(RESPONSE_STRING, "{ \"LightLevel\" : %4.2f }", ldr_read);
 
     printf("\r\nResponse status: %d\r\n", status);
     printf("Response payload: %s\r\n\r\n", RESPONSE_STRING);
@@ -196,9 +198,9 @@ void demo() {
             }
 
         */
-        double light = (float) i;
+        double ldr_read = ldr;
         double temp  = (float)36.0f-0.1*(float)i;
-        sprintf(message, "{ \"LightLevel\" : %5.2f, \"Temperature\" : %5.2f }", light, temp);
+        sprintf(message, "{ \"LightLevel\" : %5.2f, \"Temperature\" : %5.2f }", ldr_read, temp);
         LogInfo("Sending: \"%s\"", message);
 
         message_handle = IoTHubMessage_CreateFromString(message);
